@@ -1,14 +1,11 @@
-import { Link } from "react-router-dom";
-
 import { CTA } from "../components";
 import { projects } from "../constants";
-import { arrow } from "../assets/icons";
 
 const Projects = () => {
   return (
     <section className="max-container">
       <h1 className="head-text">
-        My{" "}
+        Selected{" "}
         <span className="blue-gradient_text drop-shadow font-semibold">
           Projects
         </span>
@@ -16,49 +13,48 @@ const Projects = () => {
 
       <div className="mt-5 flex flex-col gap-3 text-slate-500">
         <p>
-          There are some personal projects that I currently working on. All of
-          them are open-source, so if you come across something that piques your
-          interest, feel free to explore them by clicking the following live
-          links!
+          Web applications I’ve built and research I’m working on at
+          Macquarie University.
         </p>
       </div>
 
-      <div className="flex flex-wrap my-20 gap-16">
+      <div className="my-12 grid gap-x-12 gap-y-12 sm:grid-cols-2">
         {projects.map((project) => (
-          <div className="lg:w-[400px] w-full" key={project.name}>
-            <div className="block-container w-12 h-12">
+          <article key={project.name}>
+            <div className="block-container w-12 h-12" aria-hidden="true">
               <div className={`btn-back rounded-xl ${project.theme}`} />
               <div className="btn-front rounded-xl flex justify-center items-center">
                 <img
                   src={project.iconUrl}
-                  alt="threads"
+                  alt=""
                   className="w-1/2 h-1/2 object-contain"
                 />
               </div>
             </div>
 
             <div className="mt-5 flex flex-col">
-              <h4 className="text-2xl font-poppins font-semibold">
+              <h2 className="text-2xl font-poppins font-semibold">
                 {project.name}
-              </h4>
+              </h2>
               <p className="mt-2 text-slate-500">{project.description}</p>
-              <div className="mt-5 flex items-center gap-2 font-poppins">
-                <Link
-                  to={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-blue-600"
-                >
-                  Live Link
-                </Link>
-                <img
-                  src={arrow}
-                  alt="arrow"
-                  className="w-4 h-4 object-contain"
-                />
-              </div>
+              <p className="mt-3 text-sm text-slate-600">{project.technologies}</p>
+              {project.links.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                  {project.links.map((link) => (
+                    <a
+                      key={link.url}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-blue-700 underline-offset-4 hover:underline"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
+          </article>
         ))}
       </div>
 

@@ -1,152 +1,83 @@
-import { shopify, starbucks, tesla } from "../assets/images";
 import {
-  //   car,
   contact,
-  css,
-  //   estate,
-  express,
-  git,
   github,
-  html,
-  javascript,
   linkedin,
-  mongodb,
   motion,
-  mui,
-  nextjs,
-  nodejs,
   pricewise,
   react,
-  redux,
-  sass,
   snapgram,
-  //   summiz,
-  tailwindcss,
-  //   threads,
-  typescript,
 } from "../assets/icons";
 
 export const skills = [
   {
-    imageUrl: css,
-    name: "CSS",
-    type: "Frontend",
+    name: "Web development",
+    technologies: "TypeScript, JavaScript, React, Node.js, Java, Spring Boot",
   },
   {
-    imageUrl: express,
-    name: "Express",
-    type: "Backend",
+    name: "Data and machine learning",
+    technologies: "Python, PyTorch, SQL, MySQL, PostgreSQL, MongoDB",
   },
   {
-    imageUrl: git,
-    name: "Git",
-    type: "Version Control",
-  },
-  {
-    imageUrl: github,
-    name: "GitHub",
-    type: "Version Control",
-  },
-  {
-    imageUrl: html,
-    name: "HTML",
-    type: "Frontend",
-  },
-  {
-    imageUrl: javascript,
-    name: "JavaScript",
-    type: "Frontend",
-  },
-  {
-    imageUrl: mongodb,
-    name: "MongoDB",
-    type: "Database",
-  },
-  {
-    imageUrl: motion,
-    name: "Motion",
-    type: "Animation",
-  },
-  {
-    imageUrl: mui,
-    name: "Material-UI",
-    type: "Frontend",
-  },
-  {
-    imageUrl: nextjs,
-    name: "Next.js",
-    type: "Frontend",
-  },
-  {
-    imageUrl: nodejs,
-    name: "Node.js",
-    type: "Backend",
-  },
-  {
-    imageUrl: react,
-    name: "React",
-    type: "Frontend",
-  },
-  {
-    imageUrl: redux,
-    name: "Redux",
-    type: "State Management",
-  },
-  {
-    imageUrl: sass,
-    name: "Sass",
-    type: "Frontend",
-  },
-  {
-    imageUrl: tailwindcss,
-    name: "Tailwind CSS",
-    type: "Frontend",
-  },
-  {
-    imageUrl: typescript,
-    name: "TypeScript",
-    type: "Frontend",
+    name: "Robotics",
+    technologies: "xArm and XHAND Python SDKs, Ubuntu, hardware integration",
   },
 ];
 
 export const experiences = [
   {
-    title: "Software Engineer",
-    company_name: "WeCredo Information Service Company LTD, China",
-    icon: starbucks,
-    iconBg: "#accbe1",
-    date: "January 2022 - December 2022",
+    title: "Teaching Assistant",
+    organisation: "Macquarie University",
+    date: "February 2026 – Present",
+    colour: "#bfdbfe",
     points: [
-      "Using Java to build and maintain the internal application platforms which provide services for the government financial departments and manage the database with MySQL in Navicat GUI.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-      "Writing or contributing to instructions or manuals to guide end users.",
+      "Guide undergraduate and postgraduate students through Python analysis, visualisation and model evaluation in Data Science (COMP2200 / COMP6200).",
+      "Facilitated postgraduate workshops on extracting, transforming and analysing unstructured data in Mining Unstructured Data (COMP8230).",
     ],
   },
   {
-    title: "Cross-border E-Commerce operator",
-    company_name: "Light Dot, China",
-    icon: tesla,
-    iconBg: "#fbc3bc",
-    date: "September 2019 - December 2019",
+    title: "Web Developer",
+    organisation: "Deluxe Fashion International Pty Ltd",
+    date: "May 2024 – September 2025",
+    colour: "#c4b5fd",
     points: [
-      "Composing descriptions of merchandise for posting to online storefronts, like eBay, Amazon, Shopee, Alibaba, or other shopping websites.",
-      "Preparing or organizing online storefront marketing material, including product descriptions or subject lines, optimizing content to search engine criteria.",
-      "Receiving and processing payments from customers, using electronic transaction services.",
-      "Investigating products or markets to determine areas for opportunity or viability for merchandising specific products, using online or offline sources.",
+      "Built and maintained two clothing e-commerce websites using WordPress, WooCommerce, HTML and CSS.",
+      "Managed site updates and day-to-day administration for both storefronts.",
+    ],
+  },
+  {
+    title: "Software Engineer",
+    organisation: "WeCredo Information Service Company",
+    date: "January 2022 – December 2022",
+    colour: "#a7f3d0",
+    points: [
+      "Developed API portals and maintained Java and Spring applications that supported government credit information services.",
+      "Maintained MySQL databases and documented application changes for the development team.",
     ],
   },
   {
     title: "Web Developer Intern",
-    company_name: "Alegre PTY LTD, Sydney",
-    icon: shopify,
-    iconBg: "#b7e4c7",
-    date: "March 2018 - July 2018",
+    organisation: "Alegre Pty Ltd",
+    date: "March 2018 – June 2018",
+    colour: "#fed7aa",
     points: [
-      "Designing, building, and maintaining websites, using ASP.NET in Visual Studio and other related technologies.",
-      "Managing Oracle databases with warehousing information that supports web applications.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
+      "Helped develop and maintain an internal warehouse management application using ASP.NET and Visual Studio.",
+      "Worked with the Oracle database that supported the application.",
     ],
+  },
+];
+
+export const education = [
+  {
+    institution: "University of Sydney",
+    degree: "Master of Information Technology",
+    focus: "Data Management and Analytics",
+    date: "2020–2022",
+  },
+  {
+    institution: "University of South Australia",
+    degree: "Bachelor of Information Technology",
+    focus: "Software Development",
+    date: "2014–2017",
   },
 ];
 
@@ -172,49 +103,44 @@ export const projects = [
   {
     iconUrl: snapgram,
     theme: "btn-back-pink",
-    name: "Social Media Application",
+    name: "ZeroNet",
     description:
-      "Build a modern social app with a stunning UI with a native mobile feel, a special tech stack, an infinite scroll feature, and amazing performance using React JS, Appwrite, TypeScript, and more. Easily create and explore posts, and enjoy a strong authentication system and quick data fetching with React Query for a smooth user experience, and use Vercel to deploy it online.",
-    link: "https://zeronet.vercel.app/",
+      "A responsive photo-sharing app where people can publish photos, discover other creators, and save posts. Appwrite handles authentication, post data and image storage.",
+    technologies: "React, TypeScript, Appwrite, TanStack Query",
+    links: [
+      { label: "Live demo", url: "https://zeronet.vercel.app/" },
+      { label: "GitHub", url: "https://github.com/edwardxcj/zeronet" },
+    ],
+  },
+  {
+    iconUrl: motion,
+    theme: "btn-back-green",
+    name: "Robotic Arm and Dexterous Hand Manipulation",
+    description:
+      "An ongoing research project at Macquarie University. I integrated an xArm robotic arm with an XHAND dexterous hand and used Python to verify that they could operate together. I’m exploring teleoperation and how to collect human demonstrations for future experiments.",
+    technologies: "Python, xArm, XHAND, teleoperation",
+    links: [],
+  },
+  {
+    iconUrl: react,
+    theme: "btn-back-blue",
+    name: "3D Developer Portfolio",
+    description:
+      "This portfolio pairs an interactive 3D island with pages about my work and projects. The contact form uses EmailJS to deliver visitor messages.",
+    technologies: "React, Three.js, React Three Fiber, EmailJS",
+    links: [
+      { label: "GitHub", url: "https://github.com/edwardxcj/3d-portfolio" },
+    ],
   },
   {
     iconUrl: pricewise,
     theme: "btn-back-red",
-    name: "Crown Clothing Application",
+    name: "CROWN CLOTHING",
     description:
-      "Create an online e-commerce website allowing customers to purchase clothes, using ReactJS, Redux, Firebase, Stripe API, GraphQL, and deploy it online with Netlify.",
-    link: "https://crownclothings.com/",
+      "A clothing storefront prototype with a Firestore product catalogue, Firebase sign-in, a shopping cart and a checkout view.",
+    technologies: "React, Firebase Authentication, Firestore",
+    links: [
+      { label: "GitHub", url: "https://github.com/edwardxcj/CRWN-CLOTHING" },
+    ],
   },
-  //   {
-  //     iconUrl: threads,
-  //     theme: "btn-back-green",
-  //     name: "Full Stack Threads Clone",
-  //     description:
-  //       'Created a full-stack replica of the popular discussion platform "Threads," enabling users to post and engage in threaded conversations.',
-  //     link: "https://github.com/adrianhajdin/threads",
-  //   },
-  //   {
-  //     iconUrl: car,
-  //     theme: "btn-back-blue",
-  //     name: "Car Finding App",
-  //     description:
-  //       "Designed and built a mobile app for finding and comparing cars on the market, streamlining the car-buying process.",
-  //     link: "https://github.com/adrianhajdin/project_next13_car_showcase",
-  //   },
-  //   {
-  //     iconUrl: estate,
-  //     theme: "btn-back-black",
-  //     name: "Real-Estate Application",
-  //     description:
-  //       "Developed a web application for real estate listings, facilitating property searches and connecting buyers with sellers.",
-  //     link: "https://github.com/adrianhajdin/projects_realestate",
-  //   },
-  //   {
-  //     iconUrl: summiz,
-  //     theme: "btn-back-yellow",
-  //     name: "AI Summarizer Application",
-  //     description:
-  //       "App that leverages AI to automatically generate concise & informative summaries from lengthy text content, or blogs.",
-  //     link: "https://github.com/adrianhajdin/project_ai_summarizer",
-  //   },
 ];
