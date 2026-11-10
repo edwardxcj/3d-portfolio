@@ -1,74 +1,81 @@
 import emailjs from "@emailjs/browser";
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useState } from "react";
 
 import Fox from "../models/Fox";
 import useAlert from "../hooks/useAlert";
 import { Alert, Loader } from "../components";
 
+const contactEmail = "edwardxcj@gmail.com";
+const emptyForm = { name: "", email: "", message: "" };
+const serviceId = import.meta.env.VITE_APP_EMAILJS_SERVICE_ID?.trim();
+const templateId = import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID?.trim();
+const publicKey = import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY?.trim();
+
 const Contact = () => {
-  const formRef = useRef();
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState(emptyForm);
   const { alert, showAlert, hideAlert } = useAlert();
   const [loading, setLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState("idle");
 
   const handleChange = ({ target: { name, value } }) => {
-    setForm({ ...form, [name]: value });
+    setForm((previousForm) => ({ ...previousForm, [name]: value }));
+    if (alert.show) hideAlert();
   };
 
   const handleFocus = () => setCurrentAnimation("walk");
   const handleBlur = () => setCurrentAnimation("idle");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (loading) return;
+
+    const name = form.name.trim();
+    const email = form.email.trim();
+    const message = form.message.trim();
+    if (!name || !email || !message) {
+      showAlert({ text: "Please enter your name, email, and message." });
+      return;
+    }
+
+    if (!serviceId || !templateId || !publicKey) {
+      showAlert({ text: "The contact form is unavailable. Please email me directly." });
+      return;
+    }
+
+    hideAlert();
     setLoading(true);
     setCurrentAnimation("hit");
 
-    emailjs
-      .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
         {
-          from_name: form.name,
+          from_name: name,
           to_name: "Changjian Xiong",
-          from_email: form.email,
-          to_email: "edwardxcj@gmail.com",
-          message: form.message,
+          from_email: email,
+          to_email: contactEmail,
+          message,
         },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(
-        () => {
-          setLoading(false);
-          showAlert({
-            show: true,
-            text: "Thank you for your message 😃",
-            type: "success",
-          });
-
-          setTimeout(() => {
-            hideAlert(false);
-            setCurrentAnimation("idle");
-            setForm({
-              name: "",
-              email: "",
-              message: "",
-            });
-          }, [3000]);
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
-          setCurrentAnimation("idle");
-
-          showAlert({
-            show: true,
-            text: "I didn't receive your message 😢",
-            type: "danger",
-          });
-        }
+        publicKey
       );
+
+      setForm(emptyForm);
+      showAlert({ text: "Thanks for your message!", type: "success" });
+    } catch (error) {
+      console.error(
+        "EmailJS contact send failed",
+        error?.status,
+        error?.text ?? error?.message
+      );
+      showAlert({
+        text: "Your message couldn't be sent. Please try again or email me directly.",
+      });
+    } finally {
+      setLoading(false);
+      setCurrentAnimation("idle");
+    }
   };
 
   return (
@@ -79,8 +86,8 @@ const Contact = () => {
         <h1 className="head-text">Get in Touch</h1>
 
         <form
-          ref={formRef}
           onSubmit={handleSubmit}
+          aria-busy={loading}
           className="w-full flex flex-col gap-7 mt-14"
         >
           <label className="text-black-500 font-semibold">
@@ -91,6 +98,7 @@ const Contact = () => {
               className="input"
               placeholder="John"
               required
+              readOnly={loading}
               value={form.name}
               onChange={handleChange}
               onFocus={handleFocus}
@@ -105,6 +113,7 @@ const Contact = () => {
               className="input"
               placeholder="John@gmail.com"
               required
+              readOnly={loading}
               value={form.email}
               onChange={handleChange}
               onFocus={handleFocus}
@@ -118,6 +127,8 @@ const Contact = () => {
               rows="4"
               className="textarea"
               placeholder="Write your thoughts here..."
+              required
+              readOnly={loading}
               value={form.message}
               onChange={handleChange}
               onFocus={handleFocus}
@@ -135,6 +146,13 @@ const Contact = () => {
             {loading ? "Sending..." : "Submit"}
           </button>
         </form>
+        <p className="mt-4 text-sm text-slate-700">
+          You can also{" "}
+          <a className="underline" href={`mailto:${contactEmail}`}>
+            email me directly
+          </a>
+          .
+        </p>
       </div>
 
       <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
