@@ -14,14 +14,14 @@ const HomeInfo = ({ currentStage }) => {
   const message = stageMessage[currentStage];
 
   return (
-    <div className="pointer-events-auto mx-4 w-full max-w-lg rounded-2xl border border-white/20 bg-slate-900/90 px-4 py-4 text-center text-white shadow-lg sm:px-6">
+    <div className="pointer-events-auto w-full max-w-md rounded-2xl border border-white/20 bg-slate-900/90 px-4 py-4 text-center text-white shadow-lg sm:px-6 lg:max-w-xs lg:text-left">
       <h1 className="font-poppins text-2xl font-semibold sm:text-3xl">
         Changjian Xiong
       </h1>
       <p className="mt-1 text-sm text-slate-200 sm:text-base">
         Software developer and Teaching Assistant in Sydney
       </p>
-      <div className="mt-3 flex flex-wrap justify-center gap-2">
+      <div className="mt-3 flex flex-wrap justify-center gap-2 lg:justify-start">
         <Link
           to="/projects"
           className={`${actionStyle} bg-white text-blue-800 hover:bg-blue-50`}
