@@ -1,13 +1,14 @@
 import CTA from "../components/CTA";
+import ProjectPreview from "../components/ProjectPreview";
 import { projects } from "../constants";
 
 const Projects = () => {
   return (
     <section className="max-container">
       <h1 className="head-text">
-        Selected{" "}
+        Projects{" "}
         <span className="blue-gradient_text drop-shadow font-semibold">
-          Projects
+          &amp; Research
         </span>
       </h1>
 
@@ -83,13 +84,9 @@ const Projects = () => {
               </div>
 
               {project.preview && (
-                <img
-                  src={project.preview.source}
-                  alt={project.preview.alt}
-                  width={project.preview.width}
-                  height={project.preview.height}
-                  className="h-auto w-full rounded-xl border border-slate-200"
-                  decoding="async"
+                <ProjectPreview
+                  name={project.name}
+                  preview={project.preview}
                 />
               )}
               {project.milestones && (
