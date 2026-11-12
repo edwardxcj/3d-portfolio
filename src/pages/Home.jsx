@@ -43,14 +43,16 @@ const Home = () => {
   };
 
   return (
-    <section className="relative min-h-screen w-full bg-gradient-to-b from-sky-100 to-slate-50">
-      <div className="pointer-events-none relative z-10 flex justify-center pt-28">
+    <section className="relative flex min-h-[100svh] w-full flex-col bg-gradient-to-b from-sky-100 to-slate-50">
+      <div className="pointer-events-none relative z-10 flex justify-center px-4 pt-20 sm:px-6 lg:absolute lg:left-0 lg:top-24 lg:justify-start lg:px-8 lg:pt-0 xl:px-12">
         <HomeInfo currentStage={currentStage} />
       </div>
 
-      <OptionalScene onUnavailable={clearStage}>
-        <HomeScene setCurrentStage={setCurrentStage} />
-      </OptionalScene>
+      <div className="relative min-h-[22rem] flex-1 lg:absolute lg:inset-0 lg:min-h-0">
+        <OptionalScene onUnavailable={clearStage}>
+          <HomeScene setCurrentStage={setCurrentStage} />
+        </OptionalScene>
+      </div>
 
       <div className="absolute bottom-2 left-2 z-10 flex items-center gap-2">
         <button
