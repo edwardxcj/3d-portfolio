@@ -2,11 +2,10 @@ import {
   contact,
   github,
   linkedin,
-  motion,
   pricewise,
   react,
-  snapgram,
 } from "../assets/icons";
+import zeroNetSignIn from "../assets/projects/zeronet-sign-in.jpg";
 
 export const skills = [
   {
@@ -101,24 +100,42 @@ export const socialLinks = [
 
 export const projects = [
   {
-    iconUrl: snapgram,
-    theme: "btn-back-pink",
     name: "ZeroNet",
+    status: "Live web app",
     description:
-      "A responsive photo-sharing app where people can publish photos, discover other creators, and save posts. Appwrite handles authentication, post data and image storage.",
+      "I built a responsive photo-sharing app with profiles, photo publishing, caption search, and saved posts.",
+    contribution:
+      "I connected Appwrite authentication, post data and photo storage, and used TanStack Query to cache and paginate the feed.",
     technologies: "React, TypeScript, Appwrite, TanStack Query",
+    preview: {
+      source: zeroNetSignIn,
+      alt: "ZeroNet’s sign-in page beside a neon-lit street illustration",
+      width: 1512,
+      height: 805,
+    },
     links: [
-      { label: "Live demo", url: "https://zeronet.vercel.app/" },
+      { label: "Open live app", url: "https://zeronet.vercel.app/" },
       { label: "GitHub", url: "https://github.com/edwardxcj/zeronet" },
     ],
   },
   {
-    iconUrl: motion,
-    theme: "btn-back-green",
     name: "Robotic Arm and Dexterous Hand Manipulation",
+    status: "Ongoing research · Macquarie University",
     description:
-      "An ongoing research project at Macquarie University. I integrated an xArm robotic arm with an XHAND dexterous hand and used Python to verify that they could operate together. I’m exploring teleoperation and how to collect human demonstrations for future experiments.",
+      "At the Embodied AI and Systems Lab, I work on hardware integration for robotic manipulation experiments.",
     technologies: "Python, xArm, XHAND, teleoperation",
+    milestones: [
+      {
+        label: "Arm and hand integration",
+        description:
+          "I integrated an xArm robotic arm with an XHAND dexterous hand and used their Python SDKs to verify coordinated operation.",
+      },
+      {
+        label: "Teleoperation",
+        description:
+          "I’m exploring teleoperation and ways to record human demonstrations for future experiments.",
+      },
+    ],
     links: [],
   },
   {
