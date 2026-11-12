@@ -157,6 +157,7 @@ export const projects = [
       "A clothing storefront prototype with a Firestore product catalogue, Firebase sign-in, a shopping cart and a checkout view.",
     technologies: "React, Firebase Authentication, Firestore",
     links: [
+      { label: "Live site", url: "https://crownclothings.com/" },
       { label: "GitHub", url: "https://github.com/edwardxcj/CRWN-CLOTHING" },
     ],
   },
