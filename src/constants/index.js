@@ -5,7 +5,7 @@ import {
   pricewise,
   react,
 } from "../assets/icons";
-import zeroNetSignIn from "../assets/projects/zeronet-sign-in.jpg";
+import zeroNetSignIn from "../assets/projects/zeronet-preview.svg";
 
 export const skills = [
   {
@@ -98,6 +98,8 @@ export const socialLinks = [
   },
 ];
 
+const zeroNetSite = "https://zeronet.vercel.app/";
+
 export const projects = [
   {
     name: "ZeroNet",
@@ -108,13 +110,15 @@ export const projects = [
       "I connected Appwrite authentication, post data and photo storage, and used TanStack Query to cache and paginate the feed.",
     technologies: "React, TypeScript, Appwrite, TanStack Query",
     preview: {
+      url: `${zeroNetSite}sign-in`,
+      siteUrl: zeroNetSite,
       source: zeroNetSignIn,
       alt: "ZeroNet’s sign-in page beside a neon-lit street illustration",
       width: 1512,
-      height: 805,
+      height: 861,
     },
     links: [
-      { label: "Open live app", url: "https://zeronet.vercel.app/" },
+      { label: "Open live app", url: zeroNetSite },
       { label: "GitHub", url: "https://github.com/edwardxcj/zeronet" },
     ],
   },
