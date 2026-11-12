@@ -14,81 +14,91 @@ import { a } from "@react-spring/three";
 
 import islandScene from "../assets/3d/island.glb";
 
-const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
+const Island = ({
+  isRotating,
+  setIsRotating,
+  setCurrentStage,
+  keyboardTarget,
+  onReady,
+  ...props
+}) => {
   const islandRef = useRef();
 
   const { gl, viewport } = useThree();
   const { nodes, materials } = useGLTF(islandScene);
 
   const lastX = useRef(0);
+  const activePointer = useRef(null);
   const rotationSpeed = useRef(0);
   const dampingFactor = 0.95;
 
-  const handlePointerDown = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setIsRotating(true);
-
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-
-    lastX.current = clientX;
-  };
-
-  const handlePointerUp = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setIsRotating(false);
-  };
-
-  const handlePointerMove = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    if (isRotating) {
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-
-      const delta = (clientX - lastX.current) / viewport.width;
-
-      islandRef.current.rotation.y += delta * 0.01 * Math.PI;
-      lastX.current = clientX;
-      rotationSpeed.current = delta * 0.01 * Math.PI;
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "ArrowLeft") {
-      if (!isRotating) setIsRotating(true);
-      islandRef.current.rotation.y += 0.01 * Math.PI;
-      rotationSpeed.current = 0.0125;
-    } else if (e.key === "ArrowRight") {
-      if (!isRotating) setIsRotating(true);
-      islandRef.current.rotation.y -= 0.01 * Math.PI;
-      rotationSpeed.current = -0.0125;
-    }
-  };
-
-  const handleKeyUp = (e) => {
-    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-      setIsRotating(false);
-    }
-  };
+  useEffect(onReady, [onReady]);
 
   useEffect(() => {
     const canvas = gl.domElement;
+    const keyboard = keyboardTarget.current;
+
+    const handlePointerDown = (event) => {
+      if (event.button !== 0 || activePointer.current !== null) return;
+      event.preventDefault();
+      canvas.setPointerCapture(event.pointerId);
+      activePointer.current = event.pointerId;
+      lastX.current = event.clientX;
+      setIsRotating(true);
+    };
+
+    const handlePointerEnd = ({ pointerId }) => {
+      if (activePointer.current !== pointerId) return;
+      activePointer.current = null;
+      setIsRotating(false);
+    };
+
+    const handlePointerMove = ({ pointerId, clientX }) => {
+      if (activePointer.current !== pointerId) return;
+      const delta = (clientX - lastX.current) / viewport.width;
+      const rotation = delta * 0.01 * Math.PI;
+      islandRef.current.rotation.y += rotation;
+      lastX.current = clientX;
+      rotationSpeed.current = rotation;
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      const direction = event.key === "ArrowLeft" ? 1 : -1;
+      setIsRotating(true);
+      islandRef.current.rotation.y += direction * 0.01 * Math.PI;
+      rotationSpeed.current = direction * 0.0125;
+    };
+
+    const stopKeyboardRotation = () => {
+      if (activePointer.current === null) setIsRotating(false);
+    };
+
+    const handleKeyUp = ({ key }) => {
+      if (key === "ArrowLeft" || key === "ArrowRight") stopKeyboardRotation();
+    };
+
     canvas.addEventListener("pointerdown", handlePointerDown);
-    canvas.addEventListener("pointerup", handlePointerUp);
+    canvas.addEventListener("pointerup", handlePointerEnd);
+    canvas.addEventListener("pointercancel", handlePointerEnd);
+    canvas.addEventListener("lostpointercapture", handlePointerEnd);
     canvas.addEventListener("pointermove", handlePointerMove);
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("keyup", handleKeyUp);
+    keyboard.addEventListener("keydown", handleKeyDown);
+    keyboard.addEventListener("keyup", handleKeyUp);
+    keyboard.addEventListener("blur", stopKeyboardRotation);
 
     return () => {
       canvas.removeEventListener("pointerdown", handlePointerDown);
-      canvas.removeEventListener("pointerup", handlePointerUp);
+      canvas.removeEventListener("pointerup", handlePointerEnd);
+      canvas.removeEventListener("pointercancel", handlePointerEnd);
+      canvas.removeEventListener("lostpointercapture", handlePointerEnd);
       canvas.removeEventListener("pointermove", handlePointerMove);
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("keyup", handleKeyUp);
+      keyboard.removeEventListener("keydown", handleKeyDown);
+      keyboard.removeEventListener("keyup", handleKeyUp);
+      keyboard.removeEventListener("blur", stopKeyboardRotation);
     };
-  }, [gl, handlePointerDown, handlePointerUp, handlePointerMove]);
+  }, [gl, keyboardTarget, setIsRotating, viewport.width]);
 
   // This function is called on each frame update
   useFrame(() => {
@@ -141,7 +151,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
           setCurrentStage(1);
           break;
         default:
-          setCurrentStage(null);
+          setCurrentStage(0);
       }
     }
   });
@@ -179,7 +189,5 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     </a.group>
   );
 };
-
-useGLTF.preload("/island.glb");
 
 export default Island;

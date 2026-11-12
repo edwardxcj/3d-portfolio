@@ -1,65 +1,45 @@
 import { Link } from "react-router-dom";
 
-import { arrow } from "../assets/icons";
+const stageMessage = {
+  1: "Drag the island to explore.",
+  2: "I teach data science at Macquarie University.",
+  3: "Explore my software projects and robotics research.",
+  4: "Have a question or want to collaborate?",
+};
+
+const actionStyle =
+  "rounded-lg px-4 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
 const HomeInfo = ({ currentStage }) => {
-  if (currentStage === 1)
-    return (
-      <h1 className="sm:text-xl sm:leading-snug text-center neo-brutalism-blue py-4 px-8 text-white mx-5">
-        Hi, I’m
-        <span className="font-semibold mx-2 text-white">Changjian Xiong</span>
-        👋
-        <br />Software developer and Teaching Assistant in Sydney
+  const message = stageMessage[currentStage];
+
+  return (
+    <div className="pointer-events-auto mx-4 w-full max-w-lg rounded-2xl border border-white/20 bg-slate-900/90 px-4 py-4 text-center text-white shadow-lg sm:px-6">
+      <h1 className="font-poppins text-2xl font-semibold sm:text-3xl">
+        Changjian Xiong
       </h1>
-    );
-
-  if (currentStage === 2) {
-    return (
-      <div className="info-box">
-        <p className="font-medium sm:text-xl text-center">
-          I teach data science at Macquarie University
-          <br /> and build web applications.
-        </p>
-
-        <Link to="/about" className="neo-brutalism-white neo-btn">
-          About me
-          <img src={arrow} alt="arrow" className="w-4 h-4 object-contain" />
+      <p className="mt-1 text-sm text-slate-200 sm:text-base">
+        Software developer and Teaching Assistant in Sydney
+      </p>
+      <div className="mt-3 flex flex-wrap justify-center gap-2">
+        <Link
+          to="/projects"
+          className={`${actionStyle} bg-white text-blue-800 hover:bg-blue-50`}
+        >
+          View Projects
+        </Link>
+        <Link
+          to="/contact"
+          className={`${actionStyle} border border-slate-300 text-white hover:bg-slate-700`}
+        >
+          Contact
         </Link>
       </div>
-    );
-  }
-
-  if (currentStage === 3) {
-    return (
-      <div className="info-box">
-        <p className="font-medium text-center sm:text-xl">
-          Explore my software projects and robotics research.
-        </p>
-
-        <Link to="/projects" className="neo-brutalism-white neo-btn">
-          View projects
-          <img src={arrow} alt="arrow" className="w-4 h-4 object-contain" />
-        </Link>
-      </div>
-    );
-  }
-
-  if (currentStage === 4) {
-    return (
-      <div className="info-box">
-        <p className="font-medium sm:text-xl text-center">
-          Have a question or want to collaborate?
-        </p>
-
-        <Link to="/contact" className="neo-brutalism-white neo-btn">
-          Get in touch
-          <img src={arrow} alt="arrow" className="w-4 h-4 object-contain" />
-        </Link>
-      </div>
-    );
-  }
-
-  return null;
+      {message && (
+        <p className="mt-3 min-h-5 text-sm text-slate-200">{message}</p>
+      )}
+    </div>
+  );
 };
 
 export default HomeInfo;
