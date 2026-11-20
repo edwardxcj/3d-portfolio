@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useCallback, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 
 import Bird from "../models/Bird";
 import Island from "../models/Island";
@@ -18,6 +18,18 @@ export default function HomeScene({ setCurrentStage }) {
     setIsReady(true);
     setCurrentStage(1);
   }, [setCurrentStage]);
+
+  useEffect(() => {
+    if (!isReady || window.parent === window) return;
+
+    const frame = requestAnimationFrame(() => {
+      window.parent.postMessage(
+        { type: "portfolio-scene-ready" },
+        window.location.origin
+      );
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [isReady]);
 
   return (
     <div
