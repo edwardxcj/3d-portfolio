@@ -6,6 +6,7 @@ import {
   react,
 } from "../assets/icons";
 import zeroNetSignIn from "../assets/projects/zeronet-preview.svg";
+import crownPreview from "../assets/projects/crown-preview.svg";
 
 export const skills = [
   {
@@ -99,6 +100,7 @@ export const socialLinks = [
 ];
 
 const zeroNetSite = "https://zeronet.vercel.app/";
+const crownSite = "https://crownclothings.com/";
 
 export const projects = [
   {
@@ -160,8 +162,16 @@ export const projects = [
     description:
       "A clothing storefront prototype with a Firestore product catalogue, Firebase sign-in, a shopping cart and a checkout view.",
     technologies: "React, Firebase Authentication, Firestore",
+    preview: {
+      url: crownSite,
+      siteUrl: crownSite,
+      source: crownPreview,
+      alt: "CROWN CLOTHING’s homepage with its Everyday Edit clothing collection",
+      width: 1512,
+      height: 861,
+    },
     links: [
-      { label: "Live site", url: "https://crownclothings.com/" },
+      { label: "Live site", url: crownSite },
       { label: "GitHub", url: "https://github.com/edwardxcj/CRWN-CLOTHING" },
     ],
   },
