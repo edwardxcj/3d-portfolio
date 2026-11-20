@@ -7,6 +7,7 @@ import {
 } from "../assets/icons";
 import zeroNetSignIn from "../assets/projects/zeronet-preview.svg";
 import crownPreview from "../assets/projects/crown-preview.svg";
+import portfolioPreview from "../assets/projects/portfolio-preview.svg";
 
 export const skills = [
   {
@@ -151,6 +152,15 @@ export const projects = [
     description:
       "This portfolio pairs an interactive 3D island with pages about my work and projects. The contact form uses EmailJS to deliver visitor messages.",
     technologies: "React, Three.js, React Three Fiber, EmailJS",
+    preview: {
+      url: "/",
+      siteUrl: "/",
+      source: portfolioPreview,
+      alt: "The portfolio homepage with its 3D island and introduction card",
+      width: 1512,
+      height: 861,
+      waitForScene: true,
+    },
     links: [
       { label: "GitHub", url: "https://github.com/edwardxcj/3d-portfolio" },
     ],
