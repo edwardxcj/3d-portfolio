@@ -105,6 +105,26 @@ const crownSite = "https://crownclothings.com/";
 
 export const projects = [
   {
+    name: "Robotic Arm and Dexterous Hand Manipulation",
+    status: "Ongoing research · Macquarie University",
+    description:
+      "At the Embodied AI and Systems Lab, I work on hardware integration for robotic manipulation experiments.",
+    technologies: "Python, xArm, XHAND, teleoperation",
+    milestones: [
+      {
+        label: "Arm and hand integration",
+        description:
+          "I integrated an xArm robotic arm with an XHAND dexterous hand and used their Python SDKs to verify coordinated operation.",
+      },
+      {
+        label: "Teleoperation",
+        description:
+          "I’m exploring teleoperation and ways to record human demonstrations for future experiments.",
+      },
+    ],
+    links: [],
+  },
+  {
     name: "ZeroNet",
     status: "Live web app",
     description:
@@ -124,26 +144,6 @@ export const projects = [
       { label: "Open live app", url: zeroNetSite },
       { label: "GitHub", url: "https://github.com/edwardxcj/zeronet" },
     ],
-  },
-  {
-    name: "Robotic Arm and Dexterous Hand Manipulation",
-    status: "Ongoing research · Macquarie University",
-    description:
-      "At the Embodied AI and Systems Lab, I work on hardware integration for robotic manipulation experiments.",
-    technologies: "Python, xArm, XHAND, teleoperation",
-    milestones: [
-      {
-        label: "Arm and hand integration",
-        description:
-          "I integrated an xArm robotic arm with an XHAND dexterous hand and used their Python SDKs to verify coordinated operation.",
-      },
-      {
-        label: "Teleoperation",
-        description:
-          "I’m exploring teleoperation and ways to record human demonstrations for future experiments.",
-      },
-    ],
-    links: [],
   },
   {
     iconUrl: react,
